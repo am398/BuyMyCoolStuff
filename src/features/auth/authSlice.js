@@ -7,6 +7,7 @@ import {
     resetPasswordRequest,
     resetPassword,
     checkUser,
+    updateUser,
 } from './authAPI';
 // import { updateUser } from '../user/userAPI';
 
@@ -27,6 +28,16 @@ export const createUserAsync = createAsyncThunk(
         return response.data;
     }
 );
+
+export const updateUserAsync = createAsyncThunk(
+    'user/updateUser',
+    async (update) => {
+        const response = await updateUser(update);
+        // The value we return becomes the `fulfilled` action payload
+        return response.data;
+    }
+);
+
 
 export const checkUserAsync = createAsyncThunk(
     'user/checkUser',
@@ -167,6 +178,14 @@ export const authSlice = createSlice({
             .addCase(checkUserAsync.rejected, (state, action) => {
                 state.status = 'idle';
                 state.error = action.error;
+            })
+            .addCase(updateUserAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(updateUserAsync.fulfilled, (state, action) => {
+                state.status = 'idle';
+                // earlier there was loggedInUser variable in other slice
+                state.loggedInUserToken = action.payload;
             });
     },
 });
