@@ -19,6 +19,10 @@ import { selectLoggedInUser } from './features/auth/authSlice';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchItemsByUserIdAsync } from './features/cart/cartSlice';
+import PageNotFound from './pages/404';
+import OrderSuccessPage from './pages/OrderSuccessPage';
+import UserOrders from './features/user/components/userOrders';
+import UserOrdersPage from './pages/UserOrdersPage';
 
 const router = createBrowserRouter([
   {
@@ -52,6 +56,20 @@ const router = createBrowserRouter([
     path: "/product-detail/:id",
     element: <ProductDetailPage />,
   },
+  {
+    path: "/order-success/:id",
+    element: <OrderSuccessPage />,
+  },
+  {
+    path: '/my-orders',
+    element: (
+      <UserOrdersPage />
+    ),
+  },
+  {
+    path: "*",
+    element: <PageNotFound />,
+  },
 ]);
 
 export default function App() {
@@ -63,7 +81,7 @@ export default function App() {
       dispatch(fetchItemsByUserIdAsync(user.id));
   }, [user, dispatch])
   return (
-    <div className="App">   
+    <div className="App">
       <RouterProvider router={router} />
     </div>
   );

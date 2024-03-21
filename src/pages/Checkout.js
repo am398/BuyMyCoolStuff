@@ -11,7 +11,7 @@ import {
     selectLoggedInUser, updateUserAsync,
 } from '../features/auth/authSlice';
 import { useState } from 'react';
-// import { createOrderAsync } from '../features/order/orderSlice';
+import { createOrderAsync, selectCurrentOrder } from '../features/order/orderSlice';
 
 function Checkout() {
     const dispatch = useDispatch();
@@ -33,10 +33,13 @@ function Checkout() {
     const [selectedAddress, setSelectedAddress] = useState(null);
     const [paymentMethod, setPaymentMethod] = useState(null);
 
+    const currentOrder = useSelector(selectCurrentOrder);
+
+
     const handleQuantity = (e, item) => {
         dispatch(updateCartAsync({ ...item, quantity: +e.target.value }));
     };
- 
+
     const handleRemove = (e, id) => {
         dispatch(deleteItemFromCartAsync(id));
     };
@@ -60,8 +63,9 @@ function Checkout() {
                 user,
                 paymentMethod,
                 selectedAddress,
+                status: 'pending',
             };
-            // dispatch(createOrderAsync(order));
+            dispatch(createOrderAsync(order));
             // need to redirect from here to a new page of order success.
         } else {
             // TODO : we can use proper messaging popup here
@@ -75,6 +79,7 @@ function Checkout() {
     return (
         <>
             {!items.length && <Navigate to="/" replace={true}></Navigate>}
+            {currentOrder && <Navigate to={`/order-success/${currentOrder.id}`} replace={true}></Navigate>}
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
                     <div className="lg:col-span-3">
@@ -302,7 +307,7 @@ function Checkout() {
                                             <input
                                                 onChange={handleAddress}
                                                 name="address"
-                                                type="radio"   
+                                                type="radio"
                                                 value={index}
                                                 className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                             />
