@@ -13,7 +13,7 @@ import {
     ArrowUpIcon,
     ArrowDownIcon,
 } from '@heroicons/react/24/outline';
-// import Pagination from '../../common/Pagination';
+import Pagination from '../../common/Pagination';
 
 function AdminOrders() {
     const [page, setPage] = useState(1);
@@ -176,13 +176,13 @@ function AdminOrders() {
                                                     <div className="mr-2">
                                                         <img
                                                             className="w-6 h-6 rounded-full"
-                                                            src={item.product.thumbnail}
-                                                            alt={item.product.title}
+                                                            src={item.thumbnail}
+                                                            alt={item.title}
                                                         />
                                                     </div>
                                                     <span>
-                                                        {item.product.title} - #{item.quantity} - $
-                                                        {item.product.discountPrice}
+                                                        {item.title} - #{item.quantity} - $
+                                                        {item.discountPrice}
                                                     </span>
                                                 </div>
                                             ))}
@@ -284,12 +284,12 @@ function AdminOrders() {
                     </div>
                 </div>
             </div>
-            {/* <Pagination
+            <Pagination
                 page={page}
                 setPage={setPage}
                 handlePage={handlePage}
                 totalItems={totalOrders}
-            ></Pagination> */}
+            ></Pagination>
         </div>
     );
 }
