@@ -26,6 +26,11 @@ import UserProfilePage from './pages/UserProfilePage';
 import { fetchLoggedInUserAsync } from './features/user/userSlice';
 import Logout from './features/auth/components/Logout';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
+import ProtectedAdmin from './features/auth/components/ProtectedAdmin';
+import AdminHome from './pages/AdminHome';
+import AdminProductDetailPage from './pages/AdminProductDetailPage';
+import AdminProductFormPage from './pages/AdminProductFormPage';
+import AdminOrdersPage from './pages/AdminOrdersPage';
 
 const router = createBrowserRouter([
   {
@@ -33,6 +38,14 @@ const router = createBrowserRouter([
     element: <Protected>
       <Home />
     </Protected>,
+  },
+  {
+    path: '/admin',
+    element: (
+      <ProtectedAdmin>
+        <AdminHome />
+      </ProtectedAdmin>
+    ),
   },
   {
     path: "/login",
@@ -88,6 +101,38 @@ const router = createBrowserRouter([
     ),
   },
   {
+    path: '/admin/product-detail/:id',
+    element: (
+      <ProtectedAdmin>
+        <AdminProductDetailPage></AdminProductDetailPage>
+      </ProtectedAdmin>
+    ),
+  },
+  {
+    path: '/admin/product-form',
+    element: (
+      <ProtectedAdmin>
+        <AdminProductFormPage></AdminProductFormPage>
+      </ProtectedAdmin>
+    ),
+  },
+  {
+    path: '/admin/orders',
+    element: (
+      <ProtectedAdmin>
+        <AdminOrdersPage></AdminOrdersPage>
+      </ProtectedAdmin>
+    ),
+  },
+  {
+    path: '/admin/product-form/edit/:id',
+    element: (
+      <ProtectedAdmin>
+        <AdminProductFormPage></AdminProductFormPage>
+      </ProtectedAdmin>
+    ),
+  },
+  {
     path: "*",
     element: <PageNotFound />,
   },
@@ -100,7 +145,11 @@ export default function App() {
   useEffect(() => {
     if (user)
       dispatch(fetchItemsByUserIdAsync(user.id));
-    // dispatch(fetchLoggedInUserAsync(user.id));
+  }, [user, dispatch])
+
+  useEffect(() => {
+    if (user)
+      dispatch(fetchLoggedInUserAsync(user.id));
   }, [user, dispatch])
   return (
     <div className="App">
