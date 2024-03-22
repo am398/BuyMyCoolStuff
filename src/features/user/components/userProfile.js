@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectUserInfo, updateUserAsync } from '../userSlice';
 import { useForm } from 'react-hook-form';
+import { selectLoggedInUser } from '../../auth/authSlice';
 
 export default function UserProfile() {
     const dispatch = useDispatch();
@@ -11,7 +12,7 @@ export default function UserProfile() {
 
 
     const {
-        register,
+        register, 
         handleSubmit,
         reset,
         setValue,

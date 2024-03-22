@@ -11,18 +11,6 @@ export function createUser(userData) {
     });
 }
 
-export function updateUser(update) {
-    return new Promise(async (resolve) => {
-        const response = await fetch('http://localhost:8080/users/'+update.id, {
-            method: 'PATCH',
-            body: JSON.stringify(update),
-            headers: { 'content-type': 'application/json' },
-        });
-        const data = await response.json();
-        resolve({ data });
-    });
-}
-
 export function loginUser(loginInfo) {
     return new Promise(async (resolve, reject) => {
         try {
@@ -66,18 +54,19 @@ export function checkAuth() {
 
 export function signOut(userId) {
     return new Promise(async (resolve, reject) => {
-        try {
-            const response = await fetch('/auth/logout');
-            if (response.ok) {
-                resolve({ data: 'success' });
-            } else {
-                const error = await response.text();
-                reject(error);
-            }
-        } catch (error) {
-            console.log(error)
-            reject(error);
-        }
+        // try {
+        //     const response = await fetch('/auth/logout');
+        //     if (response.ok) {
+        //         resolve({ data: 'success' });
+        //     } else {
+        //         const error = await response.text();
+        //         reject(error);
+        //     }
+        // } catch (error) {
+        //     console.log(error)
+        //     reject(error);
+        // }
+        resolve({ data: 'success' });
     });
 }
 

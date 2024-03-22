@@ -7,7 +7,8 @@ import {
 
 const initialState = {
     status: 'idle',
-    userInfo:[]
+    userInfo: null,
+    userOrders: [],
      // this info will be used in case of detailed user info, while auth will
     // only be used for loggedInUser id etc checks
 };
@@ -23,8 +24,8 @@ export const fetchLoggedInUserOrderAsync = createAsyncThunk(
 
 export const fetchLoggedInUserAsync = createAsyncThunk(
     'user/fetchLoggedInUser',
-    async () => {
-        const response = await fetchLoggedInUser();
+    async (userId) => {
+        const response = await fetchLoggedInUser(userId);
         // The value we return becomes the `fulfilled` action payload
         return response.data;
     }
@@ -53,7 +54,7 @@ export const userSlice = createSlice({
             })
             .addCase(fetchLoggedInUserOrderAsync.fulfilled, (state, action) => {
                 state.status = 'idle';
-                state.userInfo = action.payload;
+                state.userOrders = action.payload;
 
             })
             .addCase(updateUserAsync.pending, (state) => {
@@ -75,7 +76,7 @@ export const userSlice = createSlice({
     },
 });
 
-export const selectUserOrders = (state) => state.user.userInfo;
+export const selectUserOrders = (state) => state.user.userOrders;
 export const selectUserInfo = (state) => state.user.userInfo;
 export const selectUserInfoStatus = (state) => state.user.status;
 

@@ -8,10 +8,13 @@ import {
 import { Navigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import {
-    selectLoggedInUser, updateUserAsync,
+    selectLoggedInUser,
 } from '../features/auth/authSlice';
 import { useState } from 'react';
 import { createOrderAsync, selectCurrentOrder } from '../features/order/orderSlice';
+import { updateUserAsync } from '../features/user/userSlice';
+import { fetchLoggedInUserAsync } from '../features/user/userSlice';
+import { useEffect } from 'react';
 
 function Checkout() {
     const dispatch = useDispatch();
