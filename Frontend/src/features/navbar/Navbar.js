@@ -30,7 +30,8 @@ function classNames(...classes) {
 
 function NavBar({ children }) {
   const items = useSelector(selectItems);
-  const userInfo = useSelector(selectUserInfo);
+  const userInfo =  true;
+  useSelector(selectUserInfo);
 
   return (
     <>

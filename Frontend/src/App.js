@@ -35,16 +35,17 @@ import AdminOrdersPage from './pages/AdminOrdersPage';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Protected>
+    element: 
+    // <Protected>
       <Home />
-    </Protected>,
+    // </Protected>,
   },
   {
     path: '/admin',
     element: (
-      <ProtectedAdmin>
+      // <ProtectedAdmin>
         <AdminHome />
-      </ProtectedAdmin>
+      // </ProtectedAdmin>
     ),
   },
   {
@@ -103,33 +104,33 @@ const router = createBrowserRouter([
   {
     path: '/admin/product-detail/:id',
     element: (
-      <ProtectedAdmin>
+      // <ProtectedAdmin>
         <AdminProductDetailPage></AdminProductDetailPage>
-      </ProtectedAdmin>
+      // </ProtectedAdmin>
     ),
   },
   {
     path: '/admin/product-form',
     element: (
-      <ProtectedAdmin>
+      // <ProtectedAdmin>
         <AdminProductFormPage></AdminProductFormPage>
-      </ProtectedAdmin>
+      // </ProtectedAdmin>
     ),
   },
   {
     path: '/admin/orders',
     element: (
-      <ProtectedAdmin>
+      // <ProtectedAdmin>
         <AdminOrdersPage></AdminOrdersPage>
-      </ProtectedAdmin>
+      // </ProtectedAdmin>
     ),
   },
   {
     path: '/admin/product-form/edit/:id',
     element: (
-      <ProtectedAdmin>
+      // <ProtectedAdmin>
         <AdminProductFormPage></AdminProductFormPage>
-      </ProtectedAdmin>
+      // </ProtectedAdmin>
     ),
   },
   {

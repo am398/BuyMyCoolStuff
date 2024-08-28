@@ -27,7 +27,7 @@ import {
 } from '@heroicons/react/20/solid';
 
 import { ITEMS_PER_PAGE } from '../../../app/constants';
-import { set } from 'mongoose';
+// import { set } from 'mongoose';
 import { fetchBrands } from '../productAPI';
 
 const sortOptions = [
@@ -39,7 +39,7 @@ const sortOptions = [
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ');
 }
-
+ 
 export default function ProductList() {
     const dispatch = useDispatch();
     const products = useSelector(selectAllProducts);

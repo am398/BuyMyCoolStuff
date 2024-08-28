@@ -15,6 +15,7 @@ import { createOrderAsync, selectCurrentOrder } from '../features/order/orderSli
 import { updateUserAsync } from '../features/user/userSlice';
 import { fetchLoggedInUserAsync } from '../features/user/userSlice';
 import { useEffect } from 'react';
+import {selectUserInfo } from '../features/user/userSlice';
 
 function Checkout() {
     const dispatch = useDispatch();
@@ -25,7 +26,7 @@ function Checkout() {
         formState: { errors },
     } = useForm();
 
-    const user = useSelector(selectLoggedInUser);
+    const user = useSelector(selectUserInfo );
     const items = useSelector(selectItems);
     const totalAmount = items.reduce(
         (amount, item) => item.price * item.quantity + amount,
@@ -40,7 +41,7 @@ function Checkout() {
 
 
     const handleQuantity = (e, item) => {
-        dispatch(updateCartAsync({ ...item, quantity: +e.target.value }));
+        dispatch(updateCartAsync({ ...item, quantity: + e.target.value }));
     };
 
     const handleRemove = (e, id) => {
@@ -300,7 +301,7 @@ function Checkout() {
                             <p className="mt-1 text-sm leading-6 text-gray-600">
                                 Choose from Existing addresses
                             </p>
-                            <ul role="list">
+                            <ul>
                                 {user.addresses.map((address, index) => (
                                     <li
                                         key={index}
